@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Voice Calculator</title>
+        <link rel="stylesheet" type="text/css" href="mainCSS.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Oswald:wght@200..700&display=swap"
+                rel="stylesheet">
+
+</head>
+
+<body>
+        <img id="calImg" src="calBG.png" alt="image">
+        <div class="logo">
+                <header id="header">
+                        <img id="logo" src="logo3.png" alt="LOGO">
+                        <!-- Other header content -->
+                        <!-- <img id="logo" src="logo3.png" alt="LOGO"> -->
+        </div>
+        <div class="container">
+                <div class="menu_icon_box">
+                        <div class="line1"></div>
+                        <div class="line2"></div>
+                        <div class="line3"></div>
+                </div>
+                <div class="box">
+                        <nav>
+                                <ul>
+                                        <li><a href="#index1" onclick="goIndex()">Home</a></li>
+                                        <li><a href="#about" onclick="goAbout()">About</a></li>
+                                        <li><a href="#learn" onclick="goLearn()">Learn</a></li>
+                                        <li><a href="calculator.html" id="cal" onclick="goCalculator()">Calculator</a>
+                                        </li>
+                                        <li><a href="login.html" id="login" onclick="goLogin()">Login</a></li>
+                                </ul>
+                        </nav>
+                </div>
+                </header>
+        </div>
+        <img id="bg-image" src="mainBG.png">    
+        <div class="conainer1">
+
+                <div class="content">
+
+                        <h1><span style="font-family: 'Oswald', sans-serif;">WELCOME! TO OUR CALCI WORLD</span></h1>
+                        <p><span style="font-family: 'Oswald', sans-serif;">DOODLECALCI</span></p>
+                        <h1><span style="font-family: 'Oswald', sans-serif;">WELCOME! TO OUR CALCI WORLD</span></h1>
+                </div>
+                <div class="space">
+                </div>
+                <footer class="footer">
+                        <div class="waves">
+                                <div class="wave" id="wave1"></div>
+                                <div class="wave" id="wave2"></div>
+                                <div class="wave" id="wave3"></div>
+                                <div class="wave" id="wave4"></div>
+                        </div>
+                        <ul class="social-icon">
+                                <li class="social-icon__item"><a class="social-icon__link" href="#">
+                                                <ion-icon name="logo-facebook"></ion-icon>
+                                        </a></li>
+                                <li class="social-icon__item"><a class="social-icon__link" href="#">
+                                                <ion-icon name="logo-twitter"></ion-icon>
+                                        </a></li>
+                                <li class="social-icon__item"><a class="social-icon__link" href="#">
+                                                <ion-icon name="logo-linkedin"></ion-icon>
+                                        </a></li>
+                                <li class="social-icon__item"><a class="social-icon__link" href="#">
+                                                <ion-icon name="logo-instagram"></ion-icon>
+                                        </a></li>
+                        </ul>
+                        <ul class="menu">
+                                <li class="menu__item"><a class="menu__link" href="#home">Home</a></li>
+                                <li class="menu__item"><a class="menu__link" href="#about">About</a></li>
+                                <li class="menu__item"><a class="menu__link" href="#service">Services</a></li>
+                                <li class="menu__item"><a class="menu__link" href="#team">Team</a></li>
+                                <li class="menu__item"><a class="menu__link" href="#contact">Contact</a></li>
+
+                        </ul>
+                        <p>&copy;2021 Antima & Sakshi | All Rights Reserved</p>
+                </footer>
+        </div>
+        <script>
+                function goCalculator() {
+                        window.location.href = 'calculator.html';
+                }
+                function goIndex() {
+                        window.location.href = 'index1.html';
+                }
+                function goAbout() {
+                        window.location.href = 'about.html';
+                }
+                function goLearn() {
+                        window.location.href = 'learn.html';
+                }
+                function goLogin() {
+                        window.location.href = 'login.html';
+                }
+                let menu_icon_box = document.querySelector(".menu_icon_box");
+                let box = document.querySelector(".box");
+
+
+                menu_icon_box.onclick = function () {
+                        menu_icon_box.classList.toggle("active");
+                        box.classList.toggle("active_box");
+                }
+                document.onclick = function (e) {
+                        if (!menu_icon_box.contains(e.target) && !box.contains(e.target)) {
+                                menu_icon_box.classList.remove("active");
+                                box.classList.remove("active_box");
+                        }
+                }
+                window.addEventListener('scroll', function () {
+                        var menuBox = document.querySelector('.box');
+                        var menuButton = document.querySelector('.menu_icon_box');
+
+
+                        // Check the scroll position
+                        if (window.scrollY > 100) { // Adjust the value as needed
+                                menuBox.classList.add('hide'); // Add the hide class to the menu box
+                                menuButton.classList.add('hide'); // Add the hide class to the menu button
+
+                        } else {
+                                menuBox.classList.remove('hide'); // Remove the hide class from the menu box
+                                menuButton.classList.remove('hide'); // Remove the hide class from the menu button
+
+                        }
+                        var logo = document.getElementById('logo');
+                        var header = document.getElementById('header');
+
+                        if (window.scrollY > header.offsetHeight) {
+                                logo.classList.add('hide');
+
+                        } else {
+                                logo.classList.remove('hide');
+                        }
+                });
+        </script>
+        <script type="module">
+
+                // Import the functions you need from the SDKs you need
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+
+                import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+
+
+                const firebaseConfig = {
+                        apiKey: "",
+                        authDomain: "doodlecalci.firebaseapp.com",
+                        databaseURL: "https://doodlecalci-default-rtdb.firebaseio.com",
+                        projectId: "doodlecalci",
+                        storageBucket: "doodlecalci.appspot.com",
+                        messagingSenderId: "565533819944",
+                        appId: "1:565533819944:web:1d544382d809d2486ba11d"
+                };
+
+                const app = initializeApp(firebaseConfig);
+
+
+                // Check if the user is authenticated
+                const auth = firebase.auth();
+                const calculatorLink = document.getElementById('cal')
+                auth.onAuthStateChanged(user => {
+                        if (user) {
+                                // User is signed in, allow access to the calculator page
+                                calculatorLink.href = "calculator.html";
+                        } else {
+                                // User is not signed in, restrict access to the calculator page
+                                calculatorLink.addEventListener('click', (event) => {
+                                        event.preventDefault(); // Prevent default link behavior
+                                        alert('Please login or sign up to access the calculator.');
+                                        window.location.href = "login.html"; // Redirect to the login page
+                                });
+                        }
+                });
+        </script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

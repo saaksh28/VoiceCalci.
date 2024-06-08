@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:600,700" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="{{ url_for('static', filename='CalCss.css') }}"> -->
+	<link rel="stylesheet" href="CalCss.css">
+	<title>A simple calculator</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<!-- <div class="row"> -->
+	
+	<!-- <div class="col-md-6">   -->
+		<div id="calculator">
+			<div id="calculation-history">
+				<!-- <h2>Calculation History</h2> -->
+				<ul id="history-list"></ul>
+			</div>
+			<div id="result">
+
+				<div id="history-modal" class="modal">
+					<div class="modal-content">
+						<span class="close">&times;</span>
+						<div id="history-content">
+
+						</div>
+					</div>
+				</div>
+				<img id="history-icon" src="his.png" alt="history-value">
+				<div id="output-text">
+					<div id="history">
+						<p id="history-value"></p>
+					</div>
+					<div id="output">
+						<p id="output-value"></p>
+					</div>
+				</div>
+
+				<!-- <img id="cameraIcon" src="img.png" onclick="toggleCam()"> -->
+				<div id="output-microphone">
+
+					<span id="microphone">
+					</span>
+					<span class="tooltip">Operations are plus, minus, multiply, divide &amp; reminder
+						The user input format is number + operation + number<br><br>
+						Eg: 2 multiply 5 will be 2 &times 5
+					</span>
+				</div>
+			</div>
+			<div id="keyboard">
+				<button class="operator" id="clear">C</button>
+				<button class="operator" id="backspace">CE</button>
+				<button class="operator" id="%">%</button>
+				<button class="operator" id="/">&#247;</button>
+				<button class="number" id="7">7</button>
+				<button class="number" id="8">8</button>
+				<button class="number" id="9">9</button>
+				<button class="operator" id="*">&times;</button>
+				<button class="number" id="4">4</button>
+				<button class="number" id="5">5</button>
+				<button class="number" id="6">6</button>
+				<button class="operator" id="-">-</button>
+				<button class="number" id="1">1</button>
+				<button class="number" id="2">2</button>
+				<button class="number" id="3">3</button>
+				<button class="operator" id="+">+</button>
+				<button class="number" id=".">.</button>
+				<button class="number" id="0">0</button>
+				<button class="empty" id="empty"></button>
+				<button class="operator" id="=">=</button>
+			</div>
+		<!-- </div> -->
+	<!-- </div> -->
+</div>
+
+
+	</div>
+	<!-- Add this script tag before your other JavaScript code -->
+<script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
+
+	<script type="module">
+
+		// Import the functions you need from the SDKs you need
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+          
+		import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+
+
+		const firebaseConfig = {
+			apiKey: "",
+			authDomain: "doodlecalci.firebaseapp.com",
+			databaseURL: "https://doodlecalci-default-rtdb.firebaseio.com",
+			projectId: "doodlecalci",
+			storageBucket: "doodlecalci.appspot.com",
+			messagingSenderId: "565533819944",
+			appId: "1:565533819944:web:1d544382d809d2486ba11d"
+		};
+
+		const app = initializeApp(firebaseConfig);
+
+
+		// Check if the user is authenticated
+		const auth = firebase.auth();
+		auth.onAuthStateChanged(user => {
+			// if (!user) {
+			// 	// User is not signed in, redirect to the login page
+			// 	window.location.href = "login.html";
+			// }
+			if (user) {
+				// User is signed in, allow access to the calculator page
+				calculatorLink.href = "calculator.html";
+			} else {
+				// User is not signed in, restrict access to the calculator page
+				calculatorLink.addEventListener('click', (event) => {
+					event.preventDefault(); // Prevent default link behavior
+					alert('Please login or sign up to access the calculator.');
+					window.location.href = "login.html"; // Redirect to the login page
+				});
+			}
+		});
+		
+
+
+
+	</script>
+	<script src="CalScript.js"></script>
+	<script src="Voice.js"></script>
+
+</body>
+
+</html>

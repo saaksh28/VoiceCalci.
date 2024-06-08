@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="learn.css">
+
+<body>
+    <div class="container">
+
+
+        <div class="menu_icon_box">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+        </div>
+        <div class="box">
+                <nav>
+                        <ul>
+                                <li><a href="#index" onclick="goIndex()">Home</a></li>
+                                <li><a href="#about" onclick="goAbout()">About</a></li>
+                                <li><a href="#learn" onclick="goLearn()">Learn</a></li>
+                                <li><a href="calculator.html" id="cal" onclick="goCalculator()">Calculator</a>
+                                </li>
+                                <li><a href="login.html" id="login" onclick="goLogin()">Login</a></li>
+                        </ul>
+                </nav>
+        </div>
+        </header>
+    <div class="logo">
+        <header id="header">
+            
+            
+             <img id="logo" src="logo1.png" alt="LOGO">
+            </header>
+    </div>
+    <div class="contain">
+        
+	
+	 
+        <h1 id="text">Learn something New!!!</h1>
+
+        <br>
+        <h2>After clicking Mic buttton say just what ever u want to calcultor it show Output </h2>
+        <img  id="img1" src="voicsC.png"> 
+        <div class="row">   
+           <div class="column">       
+            <img src="learn.jpg" alt="">
+        </div>
+        <div class="column"> 
+            <img src="sign2.jpeg" alt="">
+            </div>
+            <div class="column"> 
+            <img src="sign3.jpeg" alt="">
+            </div>
+            <div class="column"> 
+        <img src="sign4.jpeg" alt=""></div>
+        <div class="column"> 
+        <img src="sign5.jpeg" alt=""></div>
+        <div class="column"> 
+        <img src="sign11.jpeg" alt=""></div>
+   </div>
+   
+   
+       
+    <script>
+         window.addEventListener('scroll', function () {
+                    var logo = document.getElementById('logo');
+                    var header = document.getElementById('header');
+                    var menuIcon = document.querySelector('.menu_icon_box');
+
+                    if (window.scrollY > header.offsetHeight) {
+                        logo.classList.add('hide');
+                        menuIcon.classList.add('hide');
+                    } else {
+                        logo.classList.remove('hide');
+                        menuIcon.classList.remove('hide');
+                    }
+
+                });
+    </script>
+</body>
+
+</html>

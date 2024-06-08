@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Signup Form</title>
+
+  <link rel="stylesheet" href="LoginCss.css" />
+
+</head>
+
+<body>
+  <section class="wrapper">
+    <div class="form signup">
+      <header>Signup</header>
+      <form action="#">
+        <input type="text" id="username" placeholder="Full name" required />
+        <input type="text" id="email" placeholder="Email address" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <div class="checkbox">
+          <input type="checkbox" id="signupCheck" />
+          <label id="checkbox" for="signupCheck">I accept all terms & conditions</label>
+        </div>
+        <input type="submit" id="register" value="Signup" />
+      </form>
+    </div>
+    <div class="form login">
+      <header>Login</header>
+      <form action="#">
+        <input type="text" id="login_email" placeholder="Email address" required />
+        <input type="password" id="login_password" placeholder="Password" required autocomplete="current-password">
+
+        <a href="#">Forgot password?</a>
+        <input id="login" type="submit" value="Login" />
+      </form>
+    </div>
+    <script>
+      const wrapper = document.querySelector(".wrapper"),
+        signupHeader = document.querySelector(".signup header"),
+        loginHeader = document.querySelector(".login header");
+      loginHeader.addEventListener("click", () => {
+        wrapper.classList.add("active");
+      });
+      signupHeader.addEventListener("click", () => {
+        wrapper.classList.remove("active");
+      });
+    </script>
+  </section>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+    import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "",
+      authDomain: "doodlecalci.firebaseapp.com",
+      databaseURL: "https://doodlecalci-default-rtdb.firebaseio.com",
+      projectId: "doodlecalci",
+      storageBucket: "doodlecalci.appspot.com",
+      messagingSenderId: "565533819944",
+      appId: "1:565533819944:web:1d544382d809d2486ba11d"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth();
+    const db = getDatabase(app);
+    console.log(app);
+    //----- New Registration code start	  
+   
+    document.getElementById("register").addEventListener("click", function (e) {
+      e.preventDefault();
+
+      createUserWithEmailAndPassword(auth, document.getElementById("email").value, 
+                                           document.getElementById("password").value)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+          // Save user data to database
+          set(ref(db, 'user/' + user.uid), {
+            username: document.getElementById("username").value,
+            email: user.email,
+           
+          }).then(() => {
+            alert("Signup Successful!");
+            window.location.href = "MainProjectFile.html"; // Redirect to calculator page
+          }).catch((error) => {
+            console.error("Error saving user data: ", error);
+          });
+        }).catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.error(errorMessage);
+          if (errorCode === 'auth/email-already-in-use') {
+            alert('The email address is already in use. Please sign in or use a different email address.');
+          } else if (errorCode === 'auth/weak-password') {
+            alert('Password should be at least 6 characters long.');
+          } else {
+            alert(errorMessage);
+          }
+        });
+    });
+    //----- End
+    document.getElementById("login").addEventListener("click", function () {
+  const email = document.getElementById("login_email").value;
+  const password = document.getElementById("login_password").value;
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log("User signed in:", user.uid);
+      alert(user.email + " Login successfully!!!");
+      window.location.href = "calculator.html"; // Redirect to calculator page
+    })
+    .catch((error) => {
+      console.error("Login error:", error);
+      alert("Login failed. Please check your email and password.");
+    });
+});
+
+
+
+  </script>
+
+
+</body>
+
+</html>
